@@ -24,9 +24,6 @@ def inputNum():
 def main():
     for _ in range(inputNum()):
         a, b = inputVars()
-        # a = random.randrange(1, 100)
-        # b = random.randrange(1, 100)
-        # print(a, b)
         a, b = min(a, b), max(a, b)
         if a == b:
             print(0)
