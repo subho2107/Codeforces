@@ -10,7 +10,6 @@ public class Polygon {
             int n = Integer.parseInt(buffer.readLine());
             char [] inp;
             char [][] matrix = new char[n][n];
-            System.out.println("an");
             for(int rowPos = 0; rowPos < n; rowPos++)
             {
                 inp = buffer.readLine().toCharArray();
