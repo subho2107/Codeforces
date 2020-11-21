@@ -3,7 +3,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class C {
+public class BinaryTableEasyVersion {
     public static void updateVals(int[][]matrix, ArrayList<int[]>ones, ArrayList<int[]>zero, int i, int j){
         ones.clear();zero.clear();
         for (int k = i; k < i+2; k++) {
