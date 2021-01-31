@@ -23,8 +23,8 @@ public class And {
                 boolean check = false;
                 HashSet<Integer>set2 = new HashSet<>();
                 for (int num : arr) {
-                    set2.add(num^x);
-                    if (set.contains(num^x))
+                    set2.add(num&x);
+                    if ((num&x) != num && set.contains(num&x))
                     {
                         check = true;
                         break;
