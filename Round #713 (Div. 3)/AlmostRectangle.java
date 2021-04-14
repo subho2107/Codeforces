@@ -2,35 +2,63 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class AlmostRectangle {
-    static long gcd1(long a, long b)
-    {
-        if (b == 0)
-            return a;
-        return gcd1(b, a % b);
-
-    }
     public static void main(String[] args) throws Exception {
         BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
         int t = Integer.parseInt(buffer.readLine());
         while (t-- > 0) {
-            String [] inp = buffer.readLine().split(" ");
-            int a = Integer.parseInt(inp[0]), b = Integer.parseInt(inp[1]), c = Integer.parseInt(inp[2]);
-            long gcdProb = (long) Math.pow(10, c-1), a1 = (long) (Math.pow(10, a)-1), b1 = (long) (Math.pow(10, b)-1);
-            long ans1 = a1/gcdProb, ans2 = b1/gcdProb;
-            if (ans1 == ans2)
-                ans2--;
-            ans1 *= gcdProb;ans2*=gcdProb;
-            long gcdActual = gcd1(ans1, ans2);
-            while (Long.toString(gcdActual).length() != c){
-                gcdProb++;
-                ans1 = a1/gcdProb; ans2 = b1/gcdProb;
-                if (ans1 == ans2)
-                    ans2--;
-                ans1 *= gcdProb;ans2*=gcdProb;
-                gcdActual = gcd1(ans1, ans2);
+            int n = Integer.parseInt(buffer.readLine());
+            char[][] matrix = new char[n][n];
+            int[] a = new int[2], b = new int[2];
+            boolean check = false;
+            for (int i = 0; i < n; i++) {
+                char[] inp = buffer.readLine().toCharArray();
+                for (int j = 0; j < n; j++) {
+                    matrix[i][j] = inp[j];
+                    if (matrix[i][j] == '*') {
+                        if (!check) {
+                            check = true;
+                            a[0] = i;
+                            a[1] = j;
+                        }
+                        else
+                        {
+                            b[0] = i;
+                            b[1] = j;
+                        }
+                    }
+                }
             }
-            sb.append(ans1).append(" ").append(ans2).append("\n");
+            if (!(a[0] == b[0] || a[1] == b[1])) {
+                matrix[a[0]][b[1]] = '*';
+                matrix[b[0]][a[1]] = '*';
+            }
+            else {
+                if (a[0] == b[0]){
+                    if (a[0]-1>=0){
+                        matrix[a[0]-1][a[1]] = '*';
+                        matrix[a[0]-1][b[1]] = '*';
+                    }else {
+                        matrix[a[0]+1][a[1]] = '*';
+                        matrix[a[0]+1][b[1]] = '*';
+                    }
+                }
+                else {
+                    if (a[1]-1>=0){
+                        matrix[a[0]][a[1]-1] = '*';
+                        matrix[b[0]][b[1]-1] = '*';
+                    }else {
+                        matrix[a[0]][a[1]+1] = '*';
+                        matrix[b[0]][b[1]+1] = '*';
+                    }
+                }
+            }
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    sb.append(matrix[i][j]);
+                }
+                sb.append("\n");
+            }
         }
         System.out.println(sb);
     }
